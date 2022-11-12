@@ -13,6 +13,9 @@ export default () => {
     return (
         <Tab.Navigator
             sceneContainerStyle={{backgroundColor: 'transparent'}}
+            screenOptions={{
+                headerShown: false
+            }}
             tabBar={props => <MyTabBar {...props} />}
         >
             <Tab.Screen name="Bottom" component={Screens} />
