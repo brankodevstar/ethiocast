@@ -22,9 +22,10 @@ export default class ACTION extends Component {
             '/jsons/' +
             GLOBAL.CRM +
             '/push_actions.json';
-
+        console.log('get notification: ', path);
         DAL.getJson(path)
             .then(data => {
+                console.log('get notification result: ', data);
                 if (data != undefined) {
                     if (data.length > 0) {
                         data.forEach(element => {
