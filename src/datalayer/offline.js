@@ -30,10 +30,16 @@ export default class OFFLINE extends Component {
                     GLOBAL.Connected_Internet = false;
                 }
             });
-            NetInfo.addEventListener(
-                'connectionChange',
-                this.handleConnectivityChange,
-            );
+            // Subscribe
+            const unsubscribe = NetInfo.addEventListener(state => {
+                this.handleConnectivityChange(state.isConnected);
+            });
+            // Unsubscribe
+            unsubscribe();
+            //   NetInfo.addEventListener(
+            //     'connectionChange',
+            //     this.handleConnectivityChange,
+            //   );
         }
     }
     componentWillUnmount() {
@@ -41,10 +47,16 @@ export default class OFFLINE extends Component {
             GLOBAL.Device_IsWebTV == false &&
             GLOBAL.Device_IsAppleTV == false
         ) {
-            NetInfo.removeEventListener(
-                'connectionChange',
-                this.handleConnectivityChange,
-            );
+            // Subscribe
+            const unsubscribe = NetInfo.addEventListener(state => {
+                this.handleConnectivityChange(state.isConnected);
+            });
+            // Unsubscribe
+            unsubscribe();
+            //   NetInfo.removeEventListener(
+            //     'connectionChange',
+            //     this.handleConnectivityChange,
+            //   );
         }
     }
     handleConnectivityChange = isConnected => {
@@ -70,8 +82,7 @@ export default class OFFLINE extends Component {
                     width: GLOBAL.COL_1,
                     height: GLOBAL.ROW_1,
                     zIndex: 99999,
-                }}
-            >
+                }}>
                 <View style={{flex: 1, padding: 50}}>
                     <Text style={styles.H1}>
                         {LANG.getTranslation('no_internet')}
@@ -87,8 +98,7 @@ export default class OFFLINE extends Component {
                         alignContent: 'center',
                         alignItems: 'center',
                         alignSelf: 'center',
-                    }}
-                >
+                    }}>
                     <FontAwesome
                         style={{fontSize: 200, color: '#999'}}
                         icon={SolidIcons.exclamationCircle}
@@ -102,8 +112,7 @@ export default class OFFLINE extends Component {
                         alignItems: 'flex-end',
                         alignSelf: 'flex-end',
                         padding: 50,
-                    }}
-                >
+                    }}>
                     <ButtonNormal
                         hasTVPreferredFocus={true}
                         pointerEvents={'box-only'}

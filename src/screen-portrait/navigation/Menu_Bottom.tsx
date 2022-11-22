@@ -83,15 +83,13 @@ function MyTabBar({state, descriptors, navigation}) {
                                   GLOBAL.Device_Manufacturer == 'Apple'
                                 ? 120
                                 : sizes.height * 0.13,
-                    }}
-                >
+                    }}>
                     <ScrollView
                         contentContainerStyle={{
                             flexDirection: 'row',
                             alignItems: 'center',
                         }}
-                        horizontal
-                    >
+                        horizontal>
                         {menuArray.map((route, index) => {
                             const onPress = () => {
                                 setActive(route.menu);
@@ -121,14 +119,12 @@ function MyTabBar({state, descriptors, navigation}) {
                                     }
                                     onPress={onPress}
                                     onLongPress={onLongPress}
-                                    style={{flex: 1, alignItems: 'center'}}
-                                >
+                                    style={{flex: 1, alignItems: 'center'}}>
                                     <View
                                         style={{
                                             flexDirection: 'column',
                                             alignItems: 'center',
-                                        }}
-                                    >
+                                        }}>
                                         {GLOBAL.OTA_Update &&
                                             Platform.OS == 'android' &&
                                             route.name ==
@@ -142,8 +138,7 @@ function MyTabBar({state, descriptors, navigation}) {
                                                         right: 0,
                                                         left: 20,
                                                         zIndex: 99999,
-                                                    }}
-                                                >
+                                                    }}>
                                                     <View
                                                         style={{
                                                             flexDirection:
@@ -160,8 +155,7 @@ function MyTabBar({state, descriptors, navigation}) {
                                                                 'center',
                                                             alignItems:
                                                                 'center',
-                                                        }}
-                                                    >
+                                                        }}>
                                                         <Text bold>!</Text>
                                                     </View>
                                                 </View>
@@ -190,8 +184,7 @@ function MyTabBar({state, descriptors, navigation}) {
                                                         ? 15
                                                         : 25,
                                                 marginVertical: 10,
-                                            }}
-                                        >
+                                            }}>
                                             {route.name}
                                         </Text>
                                     </View>
@@ -275,8 +268,7 @@ export default () => {
     return (
         <Tab.Navigator
             sceneContainerStyle={{backgroundColor: 'transparent'}}
-            tabBar={props => <MyTabBar {...props} />}
-        >
+            tabBar={props => <MyTabBar {...props} />}>
             <Tab.Screen name="Bottom" component={AppStack} />
         </Tab.Navigator>
     );

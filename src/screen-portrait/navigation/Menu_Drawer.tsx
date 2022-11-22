@@ -15,7 +15,7 @@ import FontAwesome, {
     BrandIcons,
 } from 'react-native-fontawesome';
 import {
-    useIsDrawerOpen,
+    useDrawerStatus,
     createDrawerNavigator,
     DrawerContentComponentProps,
     DrawerContentOptions,
@@ -30,7 +30,7 @@ const Drawer = createDrawerNavigator();
 
 const ScreensStack = () => {
     const {colors, sizes_} = useTheme();
-    const isDrawerOpen = useIsDrawerOpen();
+    const isDrawerOpen = useDrawerStatus() === 'open';
     const animation = useRef(new Animated.Value(0)).current;
     const scale = animation.interpolate({
         inputRange: [0, 1],
@@ -62,13 +62,11 @@ const ScreensStack = () => {
                     borderColor: colors.card,
                     borderWidth: isDrawerOpen ? 1 : 0,
                 },
-            ])}
-        >
+            ])}>
             <ImageBackground
                 source={{uri: GLOBAL.Background}}
                 style={{flex: 1, width: null, height: null}}
-                imageStyle={{resizeMode: 'cover'}}
-            >
+                imageStyle={{resizeMode: 'cover'}}>
                 <AppStack />
             </ImageBackground>
         </Animated.View>
@@ -86,7 +84,7 @@ const DrawerContent = (
     const labelColor = isDark ? colors.white : colors.text;
     const [baz, setBaz] = useState(false);
     const [screens, setScreens] = useState([]);
-    const isDrawerOpen = useIsDrawerOpen();
+    const isDrawerOpen = useDrawerStatus() === 'open';
     const handleNavigation = useCallback(
         to => {
             if (GLOBAL.Device_IsWebTV == true) {
@@ -300,8 +298,7 @@ const DrawerContent = (
             scrollEnabled
             removeClippedSubviews
             renderToHardwareTextureAndroid
-            contentContainerStyle={{paddingBottom: sizes_.padding}}
-        >
+            contentContainerStyle={{paddingBottom: sizes_.padding}}>
             <Block paddingHorizontal={sizes_.padding}>
                 <View
                     style={{
@@ -309,8 +306,7 @@ const DrawerContent = (
                         paddingTop: 20,
                         alignContent: 'center',
                         flexDirection: 'row',
-                    }}
-                >
+                    }}>
                     <Image
                         //radius={0}
                         resizeMethod={'resize'}
@@ -331,8 +327,7 @@ const DrawerContent = (
                                 justify="flex-start"
                                 marginBottom={sizes_.s}
                                 key={`menu-screen-${screen.name}-${index}`}
-                                onPress={() => handleNavigation(screen.to)}
-                            >
+                                onPress={() => handleNavigation(screen.to)}>
                                 <View
                                     style={{
                                         alignContent: 'center',
@@ -340,8 +335,7 @@ const DrawerContent = (
                                         width: sizes_.md,
                                         height: sizes_.md,
                                         marginRight: sizes_.s,
-                                    }}
-                                >
+                                    }}>
                                     {screen.icon}
                                 </View>
                                 <Text p semibold={isActive} color={labelColor}>
@@ -368,8 +362,7 @@ const DrawerContent = (
                             <Button
                                 row
                                 justify="flex-start"
-                                onPress={() => handleNavigation('Watchlist')}
-                            >
+                                onPress={() => handleNavigation('Watchlist')}>
                                 <View
                                     style={{
                                         alignContent: 'center',
@@ -377,8 +370,7 @@ const DrawerContent = (
                                         width: sizes_.md,
                                         height: sizes_.md,
                                         marginRight: sizes_.s,
-                                    }}
-                                >
+                                    }}>
                                     <FontAwesome
                                         style={{fontSize: 18, color: '#fff'}}
                                         icon={SolidIcons.caretSquareRight}
@@ -393,8 +385,7 @@ const DrawerContent = (
                             <Button
                                 row
                                 justify="flex-start"
-                                onPress={() => handleNavigation('Rentals')}
-                            >
+                                onPress={() => handleNavigation('Rentals')}>
                                 <View
                                     style={{
                                         alignContent: 'center',
@@ -402,8 +393,7 @@ const DrawerContent = (
                                         width: sizes_.md,
                                         height: sizes_.md,
                                         marginRight: sizes_.s,
-                                    }}
-                                >
+                                    }}>
                                     <FontAwesome
                                         style={{fontSize: 18, color: '#fff'}}
                                         icon={SolidIcons.moneyBill}
@@ -418,8 +408,7 @@ const DrawerContent = (
                             <Button
                                 row
                                 justify="flex-start"
-                                onPress={() => handleNavigation('Support')}
-                            >
+                                onPress={() => handleNavigation('Support')}>
                                 <View
                                     style={{
                                         alignContent: 'center',
@@ -427,8 +416,7 @@ const DrawerContent = (
                                         width: sizes_.md,
                                         height: sizes_.md,
                                         marginRight: sizes_.s,
-                                    }}
-                                >
+                                    }}>
                                     <FontAwesome
                                         style={{fontSize: 18, color: '#fff'}}
                                         icon={SolidIcons.headset}
@@ -442,8 +430,7 @@ const DrawerContent = (
                         <Button
                             row
                             justify="flex-start"
-                            onPress={() => handleNavigation('Signout')}
-                        >
+                            onPress={() => handleNavigation('Signout')}>
                             <View
                                 style={{
                                     alignContent: 'center',
@@ -451,8 +438,7 @@ const DrawerContent = (
                                     width: sizes_.md,
                                     height: sizes_.md,
                                     marginRight: sizes_.s,
-                                }}
-                            >
+                                }}>
                                 <FontAwesome
                                     style={{fontSize: 18, color: '#fff'}}
                                     icon={SolidIcons.lock}
@@ -477,6 +463,9 @@ export default () => {
     return (
         <Block gradient={gradients['dark']}>
             <Drawer.Navigator
+                screenOptions={{
+                    headerShown: false,
+                }}
                 drawerType="slide"
                 overlayColor="transparent"
                 sceneContainerStyle={{flex: 1, backgroundColor: 'transparent'}}
@@ -486,8 +475,7 @@ export default () => {
                     width: GLOBAL.Device_IsPortrait ? '60%' : '30%',
                     borderRightWidth: 0,
                     backgroundColor: 'transparent',
-                }}
-            >
+                }}>
                 <Drawer.Screen name="Drawer" component={ScreensStack} />
             </Drawer.Navigator>
         </Block>

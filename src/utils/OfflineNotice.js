@@ -39,18 +39,30 @@ export default class OfflineNotice extends Component {
                     });
                 }
             });
-            NetInfo.addEventListener(
-                'connectionChange',
-                this.handleConnectivityChange,
-            );
+            // Subscribe
+            const unsubscribe = NetInfo.addEventListener(state => {
+                this.handleConnectivityChange(state.isConnected);
+            });
+            // Unsubscribe
+            unsubscribe();
+            // NetInfo.addEventListener(
+            //     'connectionChange',
+            //     this.handleConnectivityChange,
+            // );
         }
     }
 
     componentWillUnmount() {
-        NetInfo.removeEventListener(
-            'connectionChange',
-            this.handleConnectivityChange,
-        );
+        // Subscribe
+        const unsubscribe = NetInfo.addEventListener(state => {
+            this.handleConnectivityChange(state.isConnected);
+        });
+        // Unsubscribe
+        unsubscribe();
+        // NetInfo.removeEventListener(
+        //   'connectionChange',
+        //   this.handleConnectivityChange,
+        // );
     }
 
     handleConnectivityChange = isConnected => {
@@ -92,8 +104,7 @@ export default class OfflineNotice extends Component {
                                 underlayColor={GLOBAL.Button_Color}
                                 onPress={() =>
                                     AndroidOpenSettings.generalSettings()
-                                }
-                            >
+                                }>
                                 <View>
                                     <Text style={styles.login_text_}>
                                         {LANG.getTranslation('open_settings')}
@@ -109,8 +120,7 @@ export default class OfflineNotice extends Component {
                             <TouchableHighlightFocus
                                 style={{backgroundColor: '#444'}}
                                 underlayColor={GLOBAL.Button_Color}
-                                onPress={() => RNRestart.Restart()}
-                            >
+                                onPress={() => RNRestart.Restart()}>
                                 <View>
                                     <Text style={styles.login_text_}>
                                         {LANG.getTranslation(

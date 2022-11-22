@@ -107,8 +107,7 @@ export default ({navigation}): React.ReactElement => {
         Platform.OS == 'android' ? (
             <Navigator
                 initialLayout={{width: Dimensions.get('window').width}}
-                tabBar={props => <TopTabBar {...props} />}
-            >
+                tabBar={props => <TopTabBar {...props} />}>
                 <Screen name="About" component={UsersScreen} />
                 <Screen name="Settings" component={OrdersScreen} />
                 <Screen name="Devices" component={DevicesScreen} />
@@ -117,8 +116,7 @@ export default ({navigation}): React.ReactElement => {
         ) : (
             <Navigator
                 initialLayout={{width: Dimensions.get('window').width}}
-                tabBar={props => <TopTabBar_ {...props} />}
-            >
+                tabBar={props => <TopTabBar_ {...props} />}>
                 <Screen name="About" component={UsersScreen} />
                 <Screen name="Settings" component={OrdersScreen} />
                 <Screen name="Devices" component={DevicesScreen} />
@@ -142,8 +140,7 @@ export default ({navigation}): React.ReactElement => {
             }}
             selectedIndex={state.index}
             indicatorStyle={{backgroundColor: '#999', height: 1}}
-            onSelect={index => OnSelect(index, state, navigation)}
-        >
+            onSelect={index => OnSelect(index, state, navigation)}>
             <Tab title={LANG.getTranslation('about')} />
             <Tab title={LANG.getTranslation('settings')} />
             <Tab title={LANG.getTranslation('devices')} />
@@ -159,8 +156,7 @@ export default ({navigation}): React.ReactElement => {
             }}
             selectedIndex={state.index}
             indicatorStyle={{backgroundColor: '#999', height: 1}}
-            onSelect={index => OnSelect(index, state, navigation)}
-        >
+            onSelect={index => OnSelect(index, state, navigation)}>
             <Tab title={LANG.getTranslation('about')} />
             <Tab title={LANG.getTranslation('settings')} />
             <Tab title={LANG.getTranslation('devices')} />
@@ -207,8 +203,7 @@ export default ({navigation}): React.ReactElement => {
                     borderBottomWidth: 2,
                     backgroundColor: 'rgba(0, 0, 0, 0.60)',
                     margin: 5,
-                }}
-            >
+                }}>
                 <Modal
                     visible={showInstallModal}
                     style={{
@@ -216,8 +211,7 @@ export default ({navigation}): React.ReactElement => {
                             ? sizes.width * 0.8
                             : sizes.width * 0.3,
                     }}
-                    backdropStyle={{backgroundColor: 'rgba(0, 0, 0, 0.40)'}}
-                >
+                    backdropStyle={{backgroundColor: 'rgba(0, 0, 0, 0.40)'}}>
                     <Card disabled={true}>
                         <Text h5 bold>
                             {LANG.getTranslation('downloading_installing')}
@@ -234,8 +228,7 @@ export default ({navigation}): React.ReactElement => {
                             flexDirection: 'column',
                             alignSelf: 'center',
                             justifyContent: 'center',
-                        }}
-                    >
+                        }}>
                         <Text numberOfLines={1}>{item.title}</Text>
                         <Text numberOfLines={1}>{item.version_number}</Text>
                         <Text numberOfLines={4} size={10}>
@@ -249,8 +242,7 @@ export default ({navigation}): React.ReactElement => {
                         padding: 10,
                         maxHeight: 75,
                         alignSelf: 'center',
-                    }}
-                >
+                    }}>
                     <Button onPress={() => installOtaUpdate(item)}>
                         {LANG.getTranslation('installupdate')}
                     </Button>
@@ -307,16 +299,14 @@ export default ({navigation}): React.ReactElement => {
                     width={sizes.width}
                     align="center"
                     justify="center"
-                    color={'transparent'}
-                >
+                    color={'transparent'}>
                     <View
                         style={{
                             flex: 8,
                             marginHorizontal: 5,
                             padding: 10,
                             paddingBottom: 20,
-                        }}
-                    >
+                        }}>
                         <View
                             style={{
                                 borderRadius: 5,
@@ -325,8 +315,7 @@ export default ({navigation}): React.ReactElement => {
                                 padding: 10,
                                 backgroundColor: 'rgba(0, 0, 0, 0.3)',
                                 flexDirection: 'column',
-                            }}
-                        >
+                            }}>
                             <Text h5>
                                 {LANG.getTranslation('updatecenter')}
                             </Text>
@@ -340,8 +329,7 @@ export default ({navigation}): React.ReactElement => {
                                     flex: 1,
                                     justifyContent: 'center',
                                     alignSelf: 'center',
-                                }}
-                            >
+                                }}>
                                 <Text>
                                     {LANG.getTranslation('noupdatesavailable')}
                                 </Text>
@@ -371,8 +359,7 @@ export default ({navigation}): React.ReactElement => {
                 width={sizes.width}
                 align="center"
                 justify="center"
-                color={'transparent'}
-            >
+                color={'transparent'}>
                 <View style={{flex: 1, marginVertical: 4, width: sizes.width}}>
                     <View
                         style={{
@@ -383,8 +370,7 @@ export default ({navigation}): React.ReactElement => {
                             backgroundColor: 'rgba(0, 0, 0, 0.33)',
                             paddingBottom: 20,
                             borderRadius: 5,
-                        }}
-                    >
+                        }}>
                         <Text bold>
                             {LANG.getTranslation('general_information')}:
                         </Text>
@@ -413,8 +399,7 @@ export default ({navigation}): React.ReactElement => {
                             backgroundColor: 'rgba(0, 0, 0, 0.33)',
                             paddingBottom: 20,
                             borderRadius: 5,
-                        }}
-                    >
+                        }}>
                         <Text bold>
                             {LANG.getTranslation('device_information')}:
                         </Text>
@@ -444,8 +429,7 @@ export default ({navigation}): React.ReactElement => {
                             backgroundColor: 'rgba(0, 0, 0, 0.33)',
                             paddingBottom: 20,
                             borderRadius: 5,
-                        }}
-                    >
+                        }}>
                         <Text bold>
                             {LANG.getTranslation('app_information')}:
                         </Text>
@@ -619,8 +603,7 @@ export default ({navigation}): React.ReactElement => {
                     flex={1}
                     width={sizes.width}
                     align="center"
-                    color={'transparent'}
-                >
+                    color={'transparent'}>
                     <ScrollView>
                         <View
                             style={{
@@ -631,11 +614,9 @@ export default ({navigation}): React.ReactElement => {
                                 backgroundColor: 'rgba(0, 0, 0, 0.33)',
                                 paddingBottom: 20,
                                 borderRadius: 5,
-                            }}
-                        >
+                            }}>
                             <View
-                                style={{padding: 10, flexDirection: 'column'}}
-                            >
+                                style={{padding: 10, flexDirection: 'column'}}>
                                 <Text h5>
                                     {LANG.getTranslation('change_offset')}
                                 </Text>
@@ -648,8 +629,7 @@ export default ({navigation}): React.ReactElement => {
                                     width: GLOBAL.Device_IsPortrait
                                         ? sizes.width * 0.92
                                         : sizes.width * 0.3,
-                                }}
-                            >
+                                }}>
                                 <OverflowMenu
                                     anchor={renderOffsetButon}
                                     visible={offsetVisible}
@@ -668,8 +648,7 @@ export default ({navigation}): React.ReactElement => {
                                     onBackdropPress={() =>
                                         setOffsetVisible(false)
                                     }
-                                    onSelect={onItemSelectOffset}
-                                >
+                                    onSelect={onItemSelectOffset}>
                                     {offset.map(renderOffsetItem)}
                                 </OverflowMenu>
                             </View>
@@ -683,11 +662,9 @@ export default ({navigation}): React.ReactElement => {
                                 backgroundColor: 'rgba(0, 0, 0, 0.33)',
                                 paddingBottom: 20,
                                 borderRadius: 5,
-                            }}
-                        >
+                            }}>
                             <View
-                                style={{padding: 10, flexDirection: 'column'}}
-                            >
+                                style={{padding: 10, flexDirection: 'column'}}>
                                 <Text h5>
                                     {LANG.getTranslation('changelanguage')}
                                 </Text>
@@ -700,8 +677,7 @@ export default ({navigation}): React.ReactElement => {
                                     width: GLOBAL.Device_IsPortrait
                                         ? sizes.width * 0.92
                                         : sizes.width * 0.3,
-                                }}
-                            >
+                                }}>
                                 <OverflowMenu
                                     anchor={renderLanguageButon}
                                     visible={languageVisible}
@@ -720,8 +696,7 @@ export default ({navigation}): React.ReactElement => {
                                     onBackdropPress={() =>
                                         setLanguageVisible(false)
                                     }
-                                    onSelect={onItemSelectLanguage}
-                                >
+                                    onSelect={onItemSelectLanguage}>
                                     {languages.map(renderLanguageItem)}
                                 </OverflowMenu>
                             </View>
@@ -745,11 +720,9 @@ export default ({navigation}): React.ReactElement => {
                                 backgroundColor: 'rgba(0, 0, 0, 0.33)',
                                 paddingBottom: 20,
                                 borderRadius: 5,
-                            }}
-                        >
+                            }}>
                             <View
-                                style={{padding: 10, flexDirection: 'column'}}
-                            >
+                                style={{padding: 10, flexDirection: 'column'}}>
                                 <Text h5>
                                     {LANG.getTranslation('changeclock')}
                                 </Text>
@@ -763,8 +736,7 @@ export default ({navigation}): React.ReactElement => {
                                 status="control"
                                 style={{paddingLeft: 10}}
                                 checked={toggleClock}
-                                onChange={onToggleClock}
-                            >
+                                onChange={onToggleClock}>
                                 {clock}
                             </Toggle>
                         </View>
@@ -778,11 +750,9 @@ export default ({navigation}): React.ReactElement => {
                                 backgroundColor: 'rgba(0, 0, 0, 0.33)',
                                 paddingBottom: 20,
                                 borderRadius: 5,
-                            }}
-                        >
+                            }}>
                             <View
-                                style={{padding: 10, flexDirection: 'column'}}
-                            >
+                                style={{padding: 10, flexDirection: 'column'}}>
                                 <Text h5>
                                     {LANG.getTranslation('changechildlock')}
                                 </Text>
@@ -797,8 +767,7 @@ export default ({navigation}): React.ReactElement => {
                                     width: GLOBAL.Device_IsPortrait
                                         ? sizes.width * 0.92
                                         : sizes.width * 0.3,
-                                }}
-                            >
+                                }}>
                                 <Input
                                     status="control"
                                     placeholder={LANG.getTranslation(
@@ -837,15 +806,13 @@ export default ({navigation}): React.ReactElement => {
                                         width: GLOBAL.Device_IsPortrait
                                             ? sizes.width * 0.92
                                             : sizes.width * 0.3,
-                                    }}
-                                >
+                                    }}>
                                     <Button
                                         style={{
                                             marginVertical: 4,
                                         }}
                                         size={'giant'}
-                                        onPress={onChangeParentalCode}
-                                    >
+                                        onPress={onChangeParentalCode}>
                                         {LANG.getTranslation('submit')}
                                     </Button>
                                 </View>
@@ -855,8 +822,7 @@ export default ({navigation}): React.ReactElement => {
                                         color: 'red',
                                         paddingBottom: error != '' ? 10 : 0,
                                     }}
-                                    bold
-                                >
+                                    bold>
                                     {error}
                                 </Text>
                                 <Text
@@ -865,8 +831,7 @@ export default ({navigation}): React.ReactElement => {
                                         color: 'green',
                                         paddingBottom: success != '' ? 10 : 0,
                                     }}
-                                    bold
-                                >
+                                    bold>
                                     {success}
                                 </Text>
                             </View>
@@ -907,15 +872,13 @@ export default ({navigation}): React.ReactElement => {
                     margin: 5,
                     backgroundColor: 'rgba(0, 0, 0, 0.60)',
                     borderRadius: 5,
-                }}
-            >
+                }}>
                 <View
                     style={{
                         flexDirection: 'column',
                         justifyContent: 'center',
                         margin: 20,
-                    }}
-                >
+                    }}>
                     {isMobile && (
                         <FontAwesome
                             style={{fontSize: 20, color: '#fff', padding: 10}}
@@ -946,8 +909,7 @@ export default ({navigation}): React.ReactElement => {
                         flexDirection: 'column',
                         justifyContent: 'center',
                         width: sizes.width * 0.4,
-                    }}
-                >
+                    }}>
                     <Text bold numberOfLines={1}>
                         {item.model}
                     </Text>
@@ -960,8 +922,7 @@ export default ({navigation}): React.ReactElement => {
                         padding: 20,
                         justifyContent: 'flex-end',
                         alignSelf: 'center',
-                    }}
-                >
+                    }}>
                     {/* {RenderIf(GLOBAL.Device_UniqueID != item.uuid && !GLOBAL.Device_IsPhone)(
                         <Button onPress={() => onDeleteDevice(item)}>{LANG.getTranslation("delete")}</Button>
                     )} */}
@@ -975,8 +936,7 @@ export default ({navigation}): React.ReactElement => {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                             }}
-                            onPress={() => onDeleteDevice(item)}
-                        >
+                            onPress={() => onDeleteDevice(item)}>
                             <FontAwesome
                                 style={[{fontSize: 14, color: '#fff'}]}
                                 icon={SolidIcons.trash}
@@ -1019,8 +979,7 @@ export default ({navigation}): React.ReactElement => {
                 width={sizes.width}
                 align="center"
                 justify="center"
-                color={'transparent'}
-            >
+                color={'transparent'}>
                 <View style={{flex: 8, padding: 10, paddingBottom: 20}}>
                     <View
                         style={{
@@ -1031,8 +990,7 @@ export default ({navigation}): React.ReactElement => {
                             padding: 10,
                             backgroundColor: 'rgba(0, 0, 0, 0.30)',
                             flexDirection: 'column',
-                        }}
-                    >
+                        }}>
                         <Text h5>
                             {LANG.getTranslation('connecteddevices')}
                         </Text>
@@ -1068,8 +1026,7 @@ export default ({navigation}): React.ReactElement => {
             <ImageBackground
                 source={{uri: GLOBAL.Background}}
                 style={{flex: 1, width: null, height: null}}
-                imageStyle={{resizeMode: 'cover'}}
-            >
+                imageStyle={{resizeMode: 'cover'}}>
                 <NavigationContainer theme={MyTheme} independent={true}>
                     <TabNavigator />
                 </NavigationContainer>

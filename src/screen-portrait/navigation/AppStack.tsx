@@ -57,8 +57,7 @@ export const AppStack = () => {
                 GLOBAL.App_Theme == 'Akua'
                     ? {headerShown: false}
                     : screenOptions.stack
-            }
-        >
+            }>
             <Stack.Screen
                 name="Home"
                 component={Home}
