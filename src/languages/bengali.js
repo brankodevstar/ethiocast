@@ -1,3 +1,5 @@
+import GLOBAL from '../datalayer/global';
+
 module.exports = {
     //login
     language: {
@@ -52,7 +54,7 @@ module.exports = {
         m3u_subtext:
             'M3U প্লেলিস্ট দিয়ে আপনি আপনার নিজের কন্টেন্টের তালিকা তৈরি করতে পারেন',
         m3u_loadurl: 'M3U লোড করুন',
-        m3u_your_url: ' M3U: https://example.com/list.m3u',
+        m3u_your_url: ' M3U: ' + GLOBAL.M3U_URL,
         m3u_loading_header: 'আপনার M3U প্লেলিস্ট লোড হচ্ছে',
         m3u_loading_subtext:
             'আমরা আপনার M3U url লোড করার চেষ্টা করছি এবং বিশ্লেষণ করছি',

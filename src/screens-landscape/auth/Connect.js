@@ -137,9 +137,9 @@ export default class Connect extends Component {
     checkCode() {
         (async () => {
             try {
-                console.log(
+                GLOBAL.show_log && console.log(
                     'check code: ',
-                    'https://connect.tvms.io/checkcode?code=' +
+                    GLOBAL.SIGN_IN_CHECK_CODE_URL + '?code=' +
                         this.state.userid +
                         '&userid=' +
                         GLOBAL.UserID +
@@ -149,7 +149,7 @@ export default class Connect extends Component {
                         GLOBAL.ServiceID,
                 );
                 let response = await fetch(
-                    'https://connect.tvms.io/checkcode?code=' +
+                    GLOBAL.SIGN_IN_CHECK_CODE_URL + '?code=' +
                         this.state.userid +
                         '&userid=' +
                         GLOBAL.UserID +
@@ -159,7 +159,7 @@ export default class Connect extends Component {
                         GLOBAL.ServiceID,
                 );
                 let data = await response.json();
-                console.log('check code response: ', data);
+                GLOBAL.show_log && console.log('check code response: ', data);
                 if (data.success == false) {
                     this.setState({
                         error: true,

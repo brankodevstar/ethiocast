@@ -48,7 +48,7 @@ export default class DataLoader extends Component {
     }
     getUserIp() {
         this.getJson(
-            'https://cloudtv.akamaized.net/ip.php?_=' + moment().unix(),
+            GLOBAL.GET_USER_IP + '?_=' + moment().unix(),
         )
             .then(data => {
                 if (data != undefined) {
@@ -64,7 +64,7 @@ export default class DataLoader extends Component {
     }
     getUserIpFailBack() {
         this.getJson(
-            'https://geo.ipify.org/api/v1?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
+            GLOBAL.USER_IP_FAIL_BACK_URL + '?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
         )
             .then(data => {
                 if (data != undefined) {
@@ -307,7 +307,7 @@ export default class DataLoader extends Component {
     }
     getUserLocation() {
         this.getJson(
-            'https://geo.ipify.org/api/v1?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
+            GLOBAL.USER_IP_FAIL_BACK_URL + '?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
         )
             .then(data => {
                 if (data != undefined) {
@@ -1614,7 +1614,7 @@ export default class DataLoader extends Component {
             myHeaders.set('Accept-Encoding', 'gzip;q=1.0, compress;q=0.5');
         }
         try {
-            console.log('get json: ', path);
+            GLOBAL.show_log && console.log('get json: ', path);
             const jsonCall = await fetch(path, {
                 method: 'GET',
                 headers: myHeaders,
@@ -1622,7 +1622,7 @@ export default class DataLoader extends Component {
                 cors: 'no-cors',
             });
             const json_ = await jsonCall;
-            console.log('get json response: ', json_.json());
+            GLOBAL.show_log && console.log('get json response: ', json_.json());
             return json_.json();
         } catch (err) {}
     }

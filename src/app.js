@@ -24,12 +24,12 @@ class app extends Component {
             }
             TimerMixin.clearTimeout(this.timer1);
             this.timer1 = TimerMixin.setTimeout(() => {
-                console.log('platform: ', Platform.OS);
-                console.log('Device_Model: ', GLOBAL.Device_Model);
-                console.log('Device_IsTablet: ', GLOBAL.Device_IsTablet);
-                console.log('Device_IsPhone: ', GLOBAL.Device_IsPhone);
-                console.log('Device_IsWebTV', GLOBAL.Device_IsWebTV);
-                console.log('Device_IsSmartTV', GLOBAL.Device_IsSmartTV);
+                GLOBAL.show_log && console.log('platform: ', Platform.OS);
+                GLOBAL.show_log && console.log('Device_Model: ', GLOBAL.Device_Model);
+                GLOBAL.show_log && console.log('Device_IsTablet: ', GLOBAL.Device_IsTablet);
+                GLOBAL.show_log && console.log('Device_IsPhone: ', GLOBAL.Device_IsPhone);
+                GLOBAL.show_log && console.log('Device_IsWebTV', GLOBAL.Device_IsWebTV);
+                GLOBAL.show_log && console.log('Device_IsSmartTV', GLOBAL.Device_IsSmartTV);
 
                 if (Platform.OS == 'android') {
                     SplashScreen.hide();

@@ -1,3 +1,5 @@
+import GLOBAL from '../datalayer/global';
+
 module.exports = {
     //login
     language: {
@@ -49,7 +51,7 @@ module.exports = {
         m3u_header: 'የእርስዎን M3U አጫዋች ዝርዝር በዩአርኤል በኩል ይጫኑ',
         m3u_subtext: 'በ M3U አጫዋች ዝርዝር የራስዎን የሰርጦች እና ፊልሞች ዝርዝር መፍጠር ይችላሉ',
         m3u_loadurl: 'M3U ጫን',
-        m3u_your_url: 'የእርስዎን M3U ያስገቡ: https://example.com/list.m3u',
+        m3u_your_url: 'የእርስዎን M3U ያስገቡ: ' + GLOBAL.M3U_URL,
         m3u_loading_header: 'የእርስዎን M3U አጫዋች ዝርዝር በመጫን ላይ',
         m3u_loading_subtext:
             'የእርስዎን M3U ዩአርኤል ለመጫን እና ወደ ሰርጦች ፣ ፊልሞች እና ተከታታይ ለመተንተን እየሞከርን ነው',

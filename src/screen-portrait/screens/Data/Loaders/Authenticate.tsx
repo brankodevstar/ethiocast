@@ -8,12 +8,12 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 class AuthLoader {
     static getUserIp = async () => {
         try {
-            console.log(
+            GLOBAL.show_log && console.log(
                 'get user IP: ',
-                'https://cloudtv.akamaized.net/ip.php?_=' + moment().unix(),
+                GLOBAL.GET_USER_IP + '?_=' + moment().unix(),
             );
             let response = await fetch(
-                'https://cloudtv.akamaized.net/ip.php?_=' + moment().unix(),
+                GLOBAL.GET_USER_IP + '?_=' + moment().unix(),
             );
             let data = await response.json();
             if (data != undefined) {
@@ -28,12 +28,12 @@ class AuthLoader {
     };
     static getUserIpFailBack = async () => {
         try {
-            console.log(
+            GLOBAL.show_log && console.log(
                 'get user IP failback: ',
-                'https://geo.ipify.org/api/v1?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
+                GLOBAL.USER_IP_FAIL_BACK_URL + '?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
             );
             let response = await fetch(
-                'https://geo.ipify.org/api/v1?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
+                GLOBAL.USER_IP_FAIL_BACK_URL + '?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
             );
             let data = await response.json();
             if (data != undefined) {
@@ -60,7 +60,7 @@ class AuthLoader {
                 '/' +
                 UTILS.toAlphaNumeric(GLOBAL.Pass) +
                 '.json';
-            console.log(
+            GLOBAL.show_log && console.log(
                 'get access token: ',
                 GLOBAL.HTTPvsHTTPS +
                     'authorize.akamaized.net/encrypt.php?CID=' +
@@ -77,7 +77,7 @@ class AuthLoader {
             );
             let data = await response.json();
             try {
-                console.log(
+                GLOBAL.show_log && console.log(
                     'credential ID check: ',
                     GLOBAL.HTTPvsHTTPS +
                         'authorize.akamaized.net/login.php?CID=' +
@@ -93,13 +93,13 @@ class AuthLoader {
                         moment().unix(),
                 );
                 let data_ = await response_.json();
-                console.log('credential ID check response: ', data_);
+                GLOBAL.show_log && console.log('credential ID check response: ', data_);
                 if (!data_.CID) {
                     return AuthLoader.stopLoading(
                         LANG.getTranslation('no_access_wrong_cred'),
                     );
                 } else {
-                    console.log('user token: ', data_.CID);
+                    GLOBAL.show_log && console.log('user token: ', data_.CID);
                     GLOBAL.USER_TOKEN = data_.CID;
                     return AuthLoader.getUser(data_.CID);
                 }
@@ -125,7 +125,7 @@ class AuthLoader {
             '.json';
         const url = 'path=' + path + '~token=' + token;
         try {
-            console.log(
+            GLOBAL.show_log && console.log(
                 'get user: ',
                 GLOBAL.HTTPvsHTTPS +
                     'authorize.akamaized.net/encrypt.php?CID=' +
@@ -142,7 +142,7 @@ class AuthLoader {
             );
             let data = await response.json();
             try {
-                console.log(
+                GLOBAL.show_log && console.log(
                     'get user info: ',
                     GLOBAL.HTTPvsHTTPS +
                         'cloudtv.akamaized.net/getfile.php?CID=' +
@@ -159,7 +159,7 @@ class AuthLoader {
                 );
                 let data_ = await response_.json();
                 let user = JSON.parse(data_);
-                console.log('user info: ', user);
+                GLOBAL.show_log && console.log('user info: ', user);
                 var expiring = moment(
                     new Date(user.account.datetime_expired),
                 ).format('X');
@@ -254,15 +254,15 @@ class AuthLoader {
     static getUserLocation = async () => {
         try {
             //let response = await fetch(GLOBAL.HTTPvsHTTPS + 'cloudtv.akamaized.net/location.php?_=' + moment().unix());
-            console.log(
+            GLOBAL.show_log && console.log(
                 'get user location: ',
-                'https://geo.ipify.org/api/v1?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
+                GLOBAL.USER_IP_FAIL_BACK_URL + '?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
             );
             let response = await fetch(
-                'https://geo.ipify.org/api/v1?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
+                GLOBAL.USER_IP_FAIL_BACK_URL + '?apiKey=at_1hR71IevRJgz9lGCdYFdju173gYvC',
             );
             let data = await response.json();
-            console.log('user location info: ', data);
+            GLOBAL.show_log && console.log('user location info: ', data);
             if (data != undefined) {
                 var city = data.city.toLowerCase();
                 city = data.city.charAt(0).toUpperCase() + city.slice(1);
@@ -311,7 +311,7 @@ class AuthLoader {
     };
     static getUserLocationFailback = async () => {
         try {
-            console.log(
+            GLOBAL.show_log && console.log(
                 'get user location fail back: ',
                 GLOBAL.HTTPvsHTTPS +
                     'cloudtv.akamaized.net/location.php?_=' +
@@ -323,7 +323,7 @@ class AuthLoader {
                     moment().unix(),
             );
             let data = await response.json();
-            console.log('get user location fail back response: ', data);
+            GLOBAL.show_log && console.log('get user location fail back response: ', data);
             if (data != undefined) {
                 var city = data.city.toLowerCase();
                 city = data.city.charAt(0).toUpperCase() + city.slice(1);
@@ -356,11 +356,11 @@ class AuthLoader {
             '/whitelisted_' +
             GLOBAL.ProductID +
             '_v2.json';
-        console.log('get access location: ', path);
+        GLOBAL.show_log && console.log('get access location: ', path);
         try {
             let response = await fetch(path);
             let data = await response.json();
-            console.log('get access location response: ', data);
+            GLOBAL.show_log && console.log('get access location response: ', data);
             if (data != null && data != undefined) {
                 var checkCountry = data.geoaccess.find(
                     c => c.country == GLOBAL.Country,
@@ -439,10 +439,10 @@ class AuthLoader {
             GLOBAL.ProductID +
             '_product_v2.json';
         try {
-            console.log('get product: ', path);
+            GLOBAL.show_log && console.log('get product: ', path);
             let response = await fetch(path);
             let product = await response.json();
-            console.log('get product response: ', product);
+            GLOBAL.show_log && console.log('get product response: ', product);
             GLOBAL.App_Theme = product.ui;
             //GLOBAL.App_Theme = 'Rhodium';
             //GLOBAL.App_Theme = 'Iridium';
@@ -689,12 +689,12 @@ class AuthLoader {
             GLOBAL.GuiBaseUrl +
             GLOBAL.Product.base_start_url +
             '/settings/settings.json';
-        console.log('get setting gui: ', path);
+        GLOBAL.show_log && console.log('get setting gui: ', path);
         try {
             let response = await fetch(path);
             let settings = await response.json();
             settings = JSON.parse(settings);
-            console.log('get setting gui response: ', settings);
+            GLOBAL.show_log && console.log('get setting gui response: ', settings);
             GLOBAL.Settings_Gui = settings;
             GLOBAL.UserInterface = settings.userinterface;
 
@@ -859,7 +859,7 @@ class AuthLoader {
     };
     static getRegisteredDevices = async () => {
         var path =
-            'https://devices.tvms.io/getdevice?collection_key=' +
+            GLOBAL.GET_DEVICE_URL + '?collection_key=' +
             GLOBAL.IMS +
             '.' +
             GLOBAL.CRM +
@@ -867,11 +867,11 @@ class AuthLoader {
             UTILS.toAlphaNumeric(GLOBAL.UserID) +
             '.' +
             UTILS.toAlphaNumeric(GLOBAL.Pass);
-        console.log('get registered devices: ', path);
+        GLOBAL.show_log && console.log('get registered devices: ', path);
         try {
             let response = await fetch(path);
             let devices = await response.json();
-            console.log('get registered devices response: ', devices);
+            GLOBAL.show_log && console.log('get registered devices response: ', devices);
             if (devices.devices != undefined) {
                 var uuidCheck = devices.devices.filter(
                     d => d.uuid == GLOBAL.Device_UniqueID,
@@ -1022,11 +1022,11 @@ class AuthLoader {
             '/' +
             GLOBAL.ResellerID +
             '_reseller.json';
-        console.log('get reseller branding: ', path);
+        GLOBAL.show_log && console.log('get reseller branding: ', path);
         try {
             let response = await fetch(path);
             let data = await response.json();
-            console.log('get reseller branding response: ', data);
+            GLOBAL.show_log && console.log('get reseller branding response: ', data);
             if (data != undefined) {
                 GLOBAL.Reseller = data;
                 GLOBAL.Button_Color = data.selection_color;

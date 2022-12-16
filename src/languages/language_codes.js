@@ -1,3 +1,5 @@
+import GLOBAL from '../datalayer/global';
+
 module.exports = {
     languageCodes: [
         {name: 'Afghanistan', code: 'AF'},

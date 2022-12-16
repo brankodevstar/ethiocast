@@ -1,5 +1,5 @@
-import {Dimensions, Platform, View} from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import { Dimensions, Platform, View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import Orientation from 'react-native-orientation';
 import DeviceInfo from 'react-native-device-info';
 import TimerMixin from 'react-timer-mixin';
@@ -320,7 +320,7 @@ class DeviceInformation {
         if (GLOBAL.Device_IsWebTV) {
             if (GLOBAL.Device_UserAgent.indexOf('Tizen') >= 0) {
                 var tizenId = tizen.systeminfo.getCapability(
-                    'http://tizen.org/system/tizenid',
+                    GLOBAL.TIZEN_URL,
                 );
                 GLOBAL.Device_FormFactor = 'TV';
                 GLOBAL.Device_Manufacturer = 'Samsung Tizen';
@@ -432,63 +432,63 @@ class DeviceInformation {
                 GLOBAL.Device_FormFactor == 'PHONE'
                     ? 0
                     : GLOBAL.Device_IsAndroidTV || GLOBAL.Device_IsFireTV
-                    ? 110
-                    : GLOBAL.Device_IsSTB
-                    ? 230
-                    : GLOBAL.Device_IsAppleTV
-                    ? 300
-                    : 150,
+                        ? 110
+                        : GLOBAL.Device_IsSTB
+                            ? 230
+                            : GLOBAL.Device_IsAppleTV
+                                ? 300
+                                : 150,
             $bar_height:
                 GLOBAL.Device_FormFactor == 'PHONE'
                     ? 150
                     : GLOBAL.Device_IsAndroidTV || GLOBAL.Device_IsFireTV
-                    ? 150
-                    : GLOBAL.Device_IsSTB
-                    ? 230
-                    : GLOBAL.Device_IsAppleTV
-                    ? 325
-                    : 150,
+                        ? 150
+                        : GLOBAL.Device_IsSTB
+                            ? 230
+                            : GLOBAL.Device_IsAppleTV
+                                ? 325
+                                : 150,
             $header_height:
                 GLOBAL.Device_FormFactor == 'PHONE'
                     ? GLOBAL.Device_Manufacturer == 'Apple' &&
-                      GLOBAL.Device_IsPhone
+                        GLOBAL.Device_IsPhone
                         ? 80
                         : 65
                     : GLOBAL.Device_IsAndroidTV || GLOBAL.Device_IsFireTV
-                    ? 50
-                    : GLOBAL.Device_IsSTB
-                    ? 60
-                    : GLOBAL.Device_IsAppleTV
-                    ? 115
-                    : 75,
+                        ? 50
+                        : GLOBAL.Device_IsSTB
+                            ? 60
+                            : GLOBAL.Device_IsAppleTV
+                                ? 115
+                                : 75,
             $logo_height:
                 GLOBAL.Device_FormFactor == 'PHONE'
                     ? 40
                     : GLOBAL.Device_IsAndroidTV || GLOBAL.Device_IsFireTV
-                    ? 50
-                    : GLOBAL.Device_IsSTB
-                    ? 50
-                    : (GLOBAL.Device_IsWebTV && !GLOBAL.Device_IsSmartTV) ||
-                      GLOBAL.Device_Manufacturer == 'Samsung Tizen'
-                    ? 55
-                    : GLOBAL.Device_IsAppleTV
-                    ? 100
-                    : 55,
+                        ? 50
+                        : GLOBAL.Device_IsSTB
+                            ? 50
+                            : (GLOBAL.Device_IsWebTV && !GLOBAL.Device_IsSmartTV) ||
+                                GLOBAL.Device_Manufacturer == 'Samsung Tizen'
+                                ? 55
+                                : GLOBAL.Device_IsAppleTV
+                                    ? 100
+                                    : 55,
             $footer_height:
                 GLOBAL.Device_FormFactor == 'PHONE'
                     ? GLOBAL.Device_System == 'Apple'
                         ? 65
                         : 65
                     : GLOBAL.Device_IsAndroidTV || GLOBAL.Device_IsFireTV
-                    ? 40
-                    : GLOBAL.Device_IsSTB
-                    ? 60
-                    : 75,
+                        ? 40
+                        : GLOBAL.Device_IsSTB
+                            ? 60
+                            : 75,
             $sub_color:
                 GLOBAL.Device_FormFactor == 'PHONE' ||
-                GLOBAL.Device_FormFactor == 'TABLET' ||
-                GLOBAL.Device_FormFactor == 'TV' ||
-                GLOBAL.Device_FormFactor == 'WEB'
+                    GLOBAL.Device_FormFactor == 'TABLET' ||
+                    GLOBAL.Device_FormFactor == 'TV' ||
+                    GLOBAL.Device_FormFactor == 'WEB'
                     ? '#999'
                     : '#444',
             $font_size_extra: UTILS.getFontExtra(),
@@ -496,16 +496,16 @@ class DeviceInformation {
                 GLOBAL.Device_FormFactor == 'WEB'
                     ? '7rem'
                     : GLOBAL.Device_IsAndroidTV || GLOBAL.Device_IsFireTV
-                    ? '4.2rem'
-                    : GLOBAL.Device_IsSTB
-                    ? '5rem'
-                    : GLOBAL.Device_IsTablet
-                    ? '5rem'
-                    : GLOBAL.Device_IsPhone
-                    ? '3.5rem'
-                    : GLOBAL.Device_IsAppleTV
-                    ? '7rem'
-                    : '5rem',
+                        ? '4.2rem'
+                        : GLOBAL.Device_IsSTB
+                            ? '5rem'
+                            : GLOBAL.Device_IsTablet
+                                ? '5rem'
+                                : GLOBAL.Device_IsPhone
+                                    ? '3.5rem'
+                                    : GLOBAL.Device_IsAppleTV
+                                        ? '7rem'
+                                        : '5rem',
         });
 
         return UTILS.retrieveJson('UI_Profile').then(data => {

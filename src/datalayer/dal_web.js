@@ -29,54 +29,54 @@ class DAL {
         return check;
     }
     async resolveStartUrl(path) {
-        console.log('resolve start url: ', path);
+        GLOBAL.show_log && console.log('resolve start url: ', path);
         return fetch(path)
             .then(response => response.json())
             .then(responseJson => {
-                console.log('resolve start url response: ', responseJson);
+                GLOBAL.show_log && console.log('resolve start url response: ', responseJson);
                 return responseJson;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async getLoginSettings(path) {
-        console.log(
+        GLOBAL.show_log && console.log(
             'get login settings: ',
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/mappings/' +
-                path +
-                '/settings/settings.json?time=' +
-                moment().unix(),
+            'authorize.akamaized.net/mappings/' +
+            path +
+            '/settings/settings.json?time=' +
+            moment().unix(),
         );
         return fetch(
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/mappings/' +
-                path +
-                '/settings/settings.json?time=' +
-                moment().unix(),
+            'authorize.akamaized.net/mappings/' +
+            path +
+            '/settings/settings.json?time=' +
+            moment().unix(),
         )
             .then(response => response.json())
             .then(responseJson => {
-                console.log('get login settings response: ', responseJson);
+                GLOBAL.show_log && console.log('get login settings response: ', responseJson);
                 return responseJson;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async checkLoginServices(path) {
-        console.log(
+        GLOBAL.show_log && console.log(
             'check login services: ',
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/mappings/' +
-                path +
-                '/settings/services.json?time=' +
-                moment().unix(),
+            'authorize.akamaized.net/mappings/' +
+            path +
+            '/settings/services.json?time=' +
+            moment().unix(),
         );
         return fetch(
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/mappings/' +
-                path +
-                '/settings/services.json?time=' +
-                moment().unix(),
-            {method: 'HEAD'},
+            'authorize.akamaized.net/mappings/' +
+            path +
+            '/settings/services.json?time=' +
+            moment().unix(),
+            { method: 'HEAD' },
         )
             .then(res => {
                 if (res.ok) {
@@ -96,168 +96,168 @@ class DAL {
             path +
             '/settings/services.json?time=' +
             moment().unix();
-        console.log('get login services: ', path);
+        GLOBAL.show_log && console.log('get login services: ', path);
         return fetch(path)
             .then(response => response.json())
             .then(responseJson => {
-                console.log('get login services response: ', responseJson);
+                GLOBAL.show_log && console.log('get login services response: ', responseJson);
                 return responseJson;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async getGuiSettings(path) {
-        console.log('get gui settings: ', path);
+        GLOBAL.show_log && console.log('get gui settings: ', path);
         return fetch(path)
             .then(response => response.json())
             .then(responseJson => {
-                console.log('get gui settings response: ', responseJson);
+                GLOBAL.show_log && console.log('get gui settings response: ', responseJson);
                 return responseJson;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async getUserHash(path) {
-        console.log('get user hash: ', path);
+        GLOBAL.show_log && console.log('get user hash: ', path);
         return fetch(
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/encrypt.php?CID=' +
-                path +
-                '&time=' +
-                moment().unix(),
+            'authorize.akamaized.net/encrypt.php?CID=' +
+            path +
+            '&time=' +
+            moment().unix(),
             {
                 cors: 'no-cors',
             },
         )
             .then(response => response.json())
             .then(responseJson => {
-                console.log('get user hash response: ', responseJson);
+                GLOBAL.show_log && console.log('get user hash response: ', responseJson);
                 return responseJson;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
 
     async getUserToken(hash) {
-        console.log(
+        GLOBAL.show_log && console.log(
             'get use token: ',
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/login.php?CID=' +
-                hash +
-                '&time=' +
-                moment().unix(),
+            'authorize.akamaized.net/login.php?CID=' +
+            hash +
+            '&time=' +
+            moment().unix(),
         );
         return fetch(
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/login.php?CID=' +
-                hash +
-                '&time=' +
-                moment().unix(),
+            'authorize.akamaized.net/login.php?CID=' +
+            hash +
+            '&time=' +
+            moment().unix(),
             {
                 cors: 'no-cors',
             },
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('get user token response: ', responseJson_);
+                GLOBAL.show_log && console.log('get user token response: ', responseJson_);
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     getStreamToken = async Url => {
-        console.log(
+        GLOBAL.show_log && console.log(
             'get stream token: ',
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/encrypt.php?CID=' +
-                Url,
+            'authorize.akamaized.net/encrypt.php?CID=' +
+            Url,
         );
         const response = await fetch(
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/encrypt.php?CID=' +
-                Url,
+            'authorize.akamaized.net/encrypt.php?CID=' +
+            Url,
             {
                 cors: 'no-cors',
             },
-        ).catch(error => {});
+        ).catch(error => { });
         const json = await response.json();
-        console.log('get stream token response: ', json);
+        GLOBAL.show_log && console.log('get stream token response: ', json);
         return json;
     };
     getDataToken = async (Url, Token) => {
         const url = 'path=' + Url + '~token=' + Token;
-        console.log(
+        GLOBAL.show_log && console.log(
             'get data token: ',
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/encrypt.php?CID=' +
-                url +
-                '&time=' +
-                moment().unix(),
+            'authorize.akamaized.net/encrypt.php?CID=' +
+            url +
+            '&time=' +
+            moment().unix(),
         );
         const response = await fetch(
             GLOBAL.HTTPvsHTTPS +
-                'authorize.akamaized.net/encrypt.php?CID=' +
-                url +
-                '&time=' +
-                moment().unix(),
+            'authorize.akamaized.net/encrypt.php?CID=' +
+            url +
+            '&time=' +
+            moment().unix(),
             {
                 cors: 'no-cors',
             },
-        ).catch(error => {});
+        ).catch(error => { });
         const json = await response.json();
-        console.log('get data token response: ', json);
+        GLOBAL.show_log && console.log('get data token response: ', json);
         return json;
     };
 
     getData = async hash => {
-        console.log(
+        GLOBAL.show_log && console.log(
             'get data: ',
             GLOBAL.HTTPvsHTTPS +
-                'cloudtv.akamaized.net/getfile.php?CID=' +
-                hash +
-                '&time=' +
-                moment().unix(),
+            'cloudtv.akamaized.net/getfile.php?CID=' +
+            hash +
+            '&time=' +
+            moment().unix(),
         );
         const response = await fetch(
             GLOBAL.HTTPvsHTTPS +
-                'cloudtv.akamaized.net/getfile.php?CID=' +
-                hash +
-                '&time=' +
-                moment().unix(),
+            'cloudtv.akamaized.net/getfile.php?CID=' +
+            hash +
+            '&time=' +
+            moment().unix(),
             {
                 cors: 'no-cors',
             },
-        ).catch(error => {});
+        ).catch(error => { });
         const json = await response.json();
-        console.log('get data response: ', json);
+        GLOBAL.show_log && console.log('get data response: ', json);
         return json;
     };
 
     async getLocation(ip) {
-        console.log(
+        GLOBAL.show_log && console.log(
             'get location: ',
-            'https://pro.ip-api.com/json/' + ip + '?key=orgpVdNotmSbX4q',
+            GLOBAL.GET_LOCATION_URL + ip + '?key=orgpVdNotmSbX4q',
         );
         return fetch(
-            'https://pro.ip-api.com/json/' + ip + '?key=orgpVdNotmSbX4q',
+            GLOBAL.GET_LOCATION_URL + ip + '?key=orgpVdNotmSbX4q',
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('get location response: ', responseJson_);
+                GLOBAL.show_log && console.log('get location response: ', responseJson_);
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
 
     getDevices = async (collections, documents) => {
-        console.log(
+        GLOBAL.show_log && console.log(
             'get devices: ',
-            'https://devices.tvms.io/getdevice?collection_key=' +
-                collections +
-                '&document_key=' +
-                documents,
+            GLOBAL.GET_DEVICE_URL + '?collection_key=' +
+            collections +
+            '&document_key=' +
+            documents,
         );
         return fetch(
-            'https://devices.tvms.io/getdevice?collection_key=' +
-                collections +
-                '&document_key=' +
-                documents,
+            GLOBAL.GET_DEVICE_URL + '?collection_key=' +
+            collections +
+            '&document_key=' +
+            documents,
             {
                 method: 'GET',
                 cors: 'no-cors',
@@ -265,16 +265,16 @@ class DAL {
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('get devices response: ', responseJson_);
+                GLOBAL.show_log && console.log('get devices response: ', responseJson_);
                 return responseJson_;
             })
             .catch(error => {
-                return {devices: undefined};
+                return { devices: undefined };
             });
     };
     setDevices = async (collections, documents, devices) => {
-        console.log('set devices: ', 'https://devices.tvms.io/setdevice');
-        return fetch('https://devices.tvms.io/setdevice', {
+        GLOBAL.show_log && console.log('set devices: ', GLOBAL.SET_DEVICE_URL);
+        return fetch(GLOBAL.SET_DEVICE_URL, {
             method: 'POST',
             cors: 'no-cors',
             headers: {
@@ -288,21 +288,21 @@ class DAL {
                     devices: devices,
                 },
             }),
-        }).catch(error => {});
+        }).catch(error => { });
     };
     getProfile = async (collections, documents) => {
-        console.log(
+        GLOBAL.show_log && console.log(
             'get profile: ',
-            'https://devices.tvms.io/getprofile?collection_key=' +
-                collections +
-                '&document_key=' +
-                documents,
+            GLOBAL.GET_PROFILE_URL + '?collection_key=' +
+            collections +
+            '&document_key=' +
+            documents,
         );
         return fetch(
-            'https://devices.tvms.io/getprofile?collection_key=' +
-                collections +
-                '&document_key=' +
-                documents,
+            GLOBAL.GET_PROFILE_URL + '?collection_key=' +
+            collections +
+            '&document_key=' +
+            documents,
             {
                 method: 'GET',
                 cors: 'no-cors',
@@ -310,16 +310,16 @@ class DAL {
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('get profile response: ', responseJson_);
+                GLOBAL.show_log && console.log('get profile response: ', responseJson_);
                 return responseJson_;
             })
             .catch(error => {
-                return {profile: undefined};
+                return { profile: undefined };
             });
     };
     setProfile = async (collections, documents, profiles) => {
-        console.log('set profile: ', 'https://devices.tvms.io/setprofile');
-        return fetch('https://devices.tvms.io/setprofile', {
+        GLOBAL.show_log && console.log('set profile: ', GLOBAL.SET_PROFILE_URL);
+        return fetch(GLOBAL.SET_PROFILE_URL, {
             method: 'POST',
             cors: 'no-cors',
             headers: {
@@ -333,11 +333,11 @@ class DAL {
                     profile: profiles,
                 },
             }),
-        }).catch(error => {});
+        }).catch(error => { });
     };
     setMessage = async () => {
-        var path = 'https://messaging.tvms.io/setmessage';
-        console.log('set message: ', path);
+        var path = GLOBAL.SET_MESSAGE_URL;
+        GLOBAL.show_log && console.log('set message: ', path);
         return fetch(path, {
             method: 'POST',
             cors: 'no-cors',
@@ -353,18 +353,18 @@ class DAL {
                 message: {
                     content:
                         'Your subscription is about to expire, use the QR code to renew today.',
-                    hyperlink: 'https://google.com',
+                    hyperlink: GLOBAL.GOOGLE_COM_URL,
                     subject: 'Renew your subscription',
                     timestamp: moment().unix(),
                     type: 'Warning',
                 },
             }),
-        }).catch(error => {});
+        }).catch(error => { });
     };
     getMessages = async (ims, crm, username, password) => {
-        console.log('get messages: ', path);
+        GLOBAL.show_log && console.log('get messages: ', path);
         var path =
-            'https://messaging.tvms.io/getmessages?ims=' +
+            GLOBAL.GET_MESSAGE_URL + '?ims=' +
             ims +
             '&crm=' +
             crm +
@@ -378,17 +378,17 @@ class DAL {
         })
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('get messages response: ', responseJson_);
+                GLOBAL.show_log && GLOBAL.show_log && console.log('get messages response: ', responseJson_);
                 return responseJson_;
             })
             .catch(error => {
-                return {messages: null};
+                return { messages: null };
             });
     };
     deleteMessage = async (ims, crm, username, password, index) => {
-        console.log('delete message: ', path);
+        GLOBAL.show_log && console.log('delete message: ', path);
         var path =
-            'https://messaging.tvms.io/deletemessage?id=' +
+            GLOBAL.DELETE_MESSAGE_URL + '?id=' +
             index +
             '&ims=' +
             ims +
@@ -407,64 +407,64 @@ class DAL {
                 return responseJson_;
             })
             .catch(error => {
-                return {messages: []};
+                return { messages: [] };
             });
     };
     async setProblemReportContent(type, name, content_id, desc) {
-        console.log(
+        GLOBAL.show_log && console.log(
             'set problem report content: ',
             GLOBAL.Settings_Gui.style.web_api_location +
-                '/reporting/SetProblem?boxMac=' +
-                encodeURI(GLOBAL.Device_UniqueID) +
-                '&type=' +
-                encodeURI(type) +
-                '&name=' +
-                encodeURI(name) +
-                '&description=' +
-                encodeURI(desc) +
-                '&itemId=' +
-                content_id +
-                '&cmsService=' +
-                GLOBAL.CMS +
-                '&crmService=' +
-                GLOBAL.CRM +
-                '&city=' +
-                encodeURI(GLOBAL.City) +
-                '&state=' +
-                encodeURI(GLOBAL.State) +
-                '&country=' +
-                encodeURI(GLOBAL.Country) +
-                '&userid=' +
-                GLOBAL.UserID +
-                '&pass=' +
-                encodeURI(GLOBAL.Pass),
+            '/reporting/SetProblem?boxMac=' +
+            encodeURI(GLOBAL.Device_UniqueID) +
+            '&type=' +
+            encodeURI(type) +
+            '&name=' +
+            encodeURI(name) +
+            '&description=' +
+            encodeURI(desc) +
+            '&itemId=' +
+            content_id +
+            '&cmsService=' +
+            GLOBAL.CMS +
+            '&crmService=' +
+            GLOBAL.CRM +
+            '&city=' +
+            encodeURI(GLOBAL.City) +
+            '&state=' +
+            encodeURI(GLOBAL.State) +
+            '&country=' +
+            encodeURI(GLOBAL.Country) +
+            '&userid=' +
+            GLOBAL.UserID +
+            '&pass=' +
+            encodeURI(GLOBAL.Pass),
         );
         return fetch(
             GLOBAL.Settings_Gui.style.web_api_location +
-                '/reporting/SetProblem?boxMac=' +
-                encodeURI(GLOBAL.Device_UniqueID) +
-                '&type=' +
-                encodeURI(type) +
-                '&name=' +
-                encodeURI(name) +
-                '&description=' +
-                encodeURI(desc) +
-                '&itemId=' +
-                content_id +
-                '&cmsService=' +
-                GLOBAL.CMS +
-                '&crmService=' +
-                GLOBAL.CRM +
-                '&city=' +
-                encodeURI(GLOBAL.City) +
-                '&state=' +
-                encodeURI(GLOBAL.State) +
-                '&country=' +
-                encodeURI(GLOBAL.Country) +
-                '&userid=' +
-                GLOBAL.UserID +
-                '&pass=' +
-                encodeURI(GLOBAL.Pass),
+            '/reporting/SetProblem?boxMac=' +
+            encodeURI(GLOBAL.Device_UniqueID) +
+            '&type=' +
+            encodeURI(type) +
+            '&name=' +
+            encodeURI(name) +
+            '&description=' +
+            encodeURI(desc) +
+            '&itemId=' +
+            content_id +
+            '&cmsService=' +
+            GLOBAL.CMS +
+            '&crmService=' +
+            GLOBAL.CRM +
+            '&city=' +
+            encodeURI(GLOBAL.City) +
+            '&state=' +
+            encodeURI(GLOBAL.State) +
+            '&country=' +
+            encodeURI(GLOBAL.Country) +
+            '&userid=' +
+            GLOBAL.UserID +
+            '&pass=' +
+            encodeURI(GLOBAL.Pass),
             {
                 cors: 'no-cors',
             },
@@ -473,7 +473,7 @@ class DAL {
             .then(responseJson_ => {
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     getRealValue(key, content_id, content_price, content_name) {
         switch (key) {
@@ -538,7 +538,7 @@ class DAL {
                     '&';
             });
             url += params.slice(0, -1);
-            console.log('validate pay per view: ', url);
+            GLOBAL.show_log && console.log('validate pay per view: ', url);
             return fetch(url)
                 .then(response => {
                     const statusCode = response.status;
@@ -577,7 +577,7 @@ class DAL {
             GLOBAL.CMS +
             '&crmService=' +
             GLOBAL.CRM;
-        console.log('set pay per view: ', url);
+        GLOBAL.show_log && console.log('set pay per view: ', url);
         return fetch(url, {
             cors: 'no-cors',
         })
@@ -609,20 +609,20 @@ class DAL {
             GLOBAL.CMS +
             '&crmService=' +
             GLOBAL.CRM;
-        console.log('set recording: ', url);
+        GLOBAL.show_log && console.log('set recording: ', url);
         return fetch(url, {
             cors: 'no-cors',
         })
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('set recording response: ', responseJson_);
+                GLOBAL.show_log && console.log('set recording response: ', responseJson_);
                 if (responseJson_ == 'Not Approved') {
                     return 'Not Approved';
                 } else {
                     this.getAccessToken();
                 }
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     getAccessToken() {
         var splitUserId = GLOBAL.UserID.split('');
@@ -647,9 +647,9 @@ class DAL {
                             }
                         }
                     })
-                    .catch(error => {});
+                    .catch(error => { });
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     getUser(token) {
         var splitUserId = GLOBAL.UserID.split('');
@@ -676,9 +676,9 @@ class DAL {
                         GLOBAL.PPV = user.payperview;
                         GLOBAL.Wallet_Credits = user.customer.walletbalance;
                     })
-                    .catch(error => {});
+                    .catch(error => { });
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async deleteRecording(item_id) {
         var url =
@@ -693,51 +693,51 @@ class DAL {
             GLOBAL.CMS +
             '&crmService=' +
             GLOBAL.CRM;
-        console.log('delete recording: ', url);
+        GLOBAL.show_log && console.log('delete recording: ', url);
         return fetch(url)
             .then(response_ => response_.json())
             .then(responseJson_ => {
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async registerDevice() {
-        console.log(
+        GLOBAL.show_log && console.log(
             'register device: ',
             GLOBAL.Settings_Login.web_api_location +
-                '/device/addDevice?userId=' +
-                encodeURI(GLOBAL.UserID) +
-                '&password=' +
-                encodeURI(GLOBAL.Pass) +
-                '&uuid=' +
-                encodeURI(GLOBAL.Device_UniqueID) +
-                '&model=' +
-                encodeURI(GLOBAL.Device_Model) +
-                '&cmsService=' +
-                GLOBAL.CMS +
-                '&crmService=' +
-                GLOBAL.CRM,
+            '/device/addDevice?userId=' +
+            encodeURI(GLOBAL.UserID) +
+            '&password=' +
+            encodeURI(GLOBAL.Pass) +
+            '&uuid=' +
+            encodeURI(GLOBAL.Device_UniqueID) +
+            '&model=' +
+            encodeURI(GLOBAL.Device_Model) +
+            '&cmsService=' +
+            GLOBAL.CMS +
+            '&crmService=' +
+            GLOBAL.CRM,
         );
         return fetch(
             GLOBAL.Settings_Login.web_api_location +
-                '/device/addDevice?userId=' +
-                encodeURI(GLOBAL.UserID) +
-                '&password=' +
-                encodeURI(GLOBAL.Pass) +
-                '&uuid=' +
-                encodeURI(GLOBAL.Device_UniqueID) +
-                '&model=' +
-                encodeURI(GLOBAL.Device_Model) +
-                '&cmsService=' +
-                GLOBAL.CMS +
-                '&crmService=' +
-                GLOBAL.CRM,
+            '/device/addDevice?userId=' +
+            encodeURI(GLOBAL.UserID) +
+            '&password=' +
+            encodeURI(GLOBAL.Pass) +
+            '&uuid=' +
+            encodeURI(GLOBAL.Device_UniqueID) +
+            '&model=' +
+            encodeURI(GLOBAL.Device_Model) +
+            '&cmsService=' +
+            GLOBAL.CMS +
+            '&crmService=' +
+            GLOBAL.CRM,
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
 
     async registerCustomer(
@@ -785,14 +785,14 @@ class DAL {
             sendSMS +
             '&sendMail=' +
             sendMail;
-        console.log('register customer: ', path);
+        GLOBAL.show_log && console.log('register customer: ', path);
         return fetch(path)
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('register customer response: ', responseJson_);
+                GLOBAL.show_log && console.log('register customer response: ', responseJson_);
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async addProfile(name, mode) {
         var body = JSON.stringify({
@@ -804,16 +804,16 @@ class DAL {
             mode: mode,
             avatar: '',
         });
-        console.log(
+        GLOBAL.show_log && console.log(
             'add profile: ',
             GLOBAL.Settings_Login.web_api_location +
-                '/CustomerProfile/AddCustomerProfile?datas=' +
-                encodeURI(body),
+            '/CustomerProfile/AddCustomerProfile?datas=' +
+            encodeURI(body),
         );
         return await fetch(
             GLOBAL.Settings_Login.web_api_location +
-                '/CustomerProfile/AddCustomerProfile?datas=' +
-                encodeURI(body),
+            '/CustomerProfile/AddCustomerProfile?datas=' +
+            encodeURI(body),
             {
                 method: 'GET',
                 headers: {
@@ -823,10 +823,10 @@ class DAL {
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('add profile response: ', responseJson_);
+                GLOBAL.show_log && console.log('add profile response: ', responseJson_);
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async editProfile(name, mode, profile_id) {
         var body = JSON.stringify({
@@ -839,16 +839,16 @@ class DAL {
             mode: mode,
             avatar: '',
         });
-        console.log(
+        GLOBAL.show_log && console.log(
             'edit profile: ',
             GLOBAL.Settings_Login.web_api_location +
-                '/CustomerProfile/EditCustomerProfile?datas=' +
-                encodeURI(body),
+            '/CustomerProfile/EditCustomerProfile?datas=' +
+            encodeURI(body),
         );
         return await fetch(
             GLOBAL.Settings_Login.web_api_location +
-                '/CustomerProfile/EditCustomerProfile?datas=' +
-                encodeURI(body),
+            '/CustomerProfile/EditCustomerProfile?datas=' +
+            encodeURI(body),
             {
                 method: 'GET',
                 headers: {
@@ -858,10 +858,10 @@ class DAL {
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('edit profile response: '.responseJson_);
+                GLOBAL.show_log && console.log('edit profile response: '.responseJson_);
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async deleteProfile(profile_id) {
         var body = JSON.stringify({
@@ -871,16 +871,16 @@ class DAL {
             cmsService: GLOBAL.CMS,
             profile_id: profile_id,
         });
-        console.log(
+        GLOBAL.show_log && console.log(
             'delete profile: ',
             GLOBAL.Settings_Login.web_api_location +
-                '/CustomerProfile/DeleteCustomerProfile?datas=' +
-                encodeURI(body),
+            '/CustomerProfile/DeleteCustomerProfile?datas=' +
+            encodeURI(body),
         );
         return await fetch(
             GLOBAL.Settings_Login.web_api_location +
-                '/CustomerProfile/DeleteCustomerProfile?datas=' +
-                encodeURI(body),
+            '/CustomerProfile/DeleteCustomerProfile?datas=' +
+            encodeURI(body),
             {
                 method: 'GET',
                 headers: {
@@ -890,10 +890,10 @@ class DAL {
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('delete profile response: ', responseJson_);
+                GLOBAL.show_log && console.log('delete profile response: ', responseJson_);
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async addRecommendation(tags) {
         var body = JSON.stringify({
@@ -904,16 +904,16 @@ class DAL {
             crmService: GLOBAL.CRM,
             cmsService: GLOBAL.CMS,
         });
-        console.log(
+        GLOBAL.show_log && console.log(
             'add recommendation: ',
             GLOBAL.Settings_Login.web_api_location +
-                '/CustomerProfile/AddCustomerRecommendation?datas=' +
-                encodeURI(body),
+            '/CustomerProfile/AddCustomerRecommendation?datas=' +
+            encodeURI(body),
         );
         return await fetch(
             GLOBAL.Settings_Login.web_api_location +
-                '/CustomerProfile/AddCustomerRecommendation?datas=' +
-                encodeURI(body),
+            '/CustomerProfile/AddCustomerRecommendation?datas=' +
+            encodeURI(body),
             {
                 method: 'GET',
                 headers: {
@@ -923,10 +923,10 @@ class DAL {
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('add recommendation response: ', responseJson_);
+                GLOBAL.show_log && console.log('add recommendation response: ', responseJson_);
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async forgotPassword(type, email, user, mac) {
         var path =
@@ -944,197 +944,197 @@ class DAL {
             '&macaddress=&userid=' +
             encodeURI(GLOBAL.UserID) +
             '&email=';
-        console.log('forgot password: ', path);
+        GLOBAL.show_log && console.log('forgot password: ', path);
         return fetch(path)
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('forgot password response: ', responseJson_);
+                GLOBAL.show_log && console.log('forgot password response: ', responseJson_);
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async requestAdInformation(id) {
-        console.log(
+        GLOBAL.show_log && console.log(
             'request ad information: ',
             GLOBAL.Settings_Login.web_api_location +
-                '/reporting/requestInformation?campaignId=' +
-                id +
-                '&crmService=' +
-                GLOBAL.CRM +
-                '&cmsService=' +
-                GLOBAL.CMS +
-                '&city=' +
-                GLOBAL.City +
-                '&country=' +
-                GLOBAL.Country +
-                '&boxMac=' +
-                encodeURI(GLOBAL.Device_UniqueID) +
-                '&userid=' +
-                encodeURI(GLOBAL.UserID) +
-                '&state=' +
-                GLOBAL.State,
+            '/reporting/requestInformation?campaignId=' +
+            id +
+            '&crmService=' +
+            GLOBAL.CRM +
+            '&cmsService=' +
+            GLOBAL.CMS +
+            '&city=' +
+            GLOBAL.City +
+            '&country=' +
+            GLOBAL.Country +
+            '&boxMac=' +
+            encodeURI(GLOBAL.Device_UniqueID) +
+            '&userid=' +
+            encodeURI(GLOBAL.UserID) +
+            '&state=' +
+            GLOBAL.State,
         );
         return fetch(
             GLOBAL.Settings_Login.web_api_location +
-                '/reporting/requestInformation?campaignId=' +
-                id +
-                '&crmService=' +
-                GLOBAL.CRM +
-                '&cmsService=' +
-                GLOBAL.CMS +
-                '&city=' +
-                GLOBAL.City +
-                '&country=' +
-                GLOBAL.Country +
-                '&boxMac=' +
-                encodeURI(GLOBAL.Device_UniqueID) +
-                '&userid=' +
-                encodeURI(GLOBAL.UserID) +
-                '&state=' +
-                GLOBAL.State,
+            '/reporting/requestInformation?campaignId=' +
+            id +
+            '&crmService=' +
+            GLOBAL.CRM +
+            '&cmsService=' +
+            GLOBAL.CMS +
+            '&city=' +
+            GLOBAL.City +
+            '&country=' +
+            GLOBAL.Country +
+            '&boxMac=' +
+            encodeURI(GLOBAL.Device_UniqueID) +
+            '&userid=' +
+            encodeURI(GLOBAL.UserID) +
+            '&state=' +
+            GLOBAL.State,
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('request ad information response: ', responseJson_);
+                GLOBAL.show_log && console.log('request ad information response: ', responseJson_);
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async getHomeScreenDuoAds() {
-        console.log(
+        GLOBAL.show_log && console.log(
             'get home screen duo ads: ',
             GLOBAL.Settings_Gui.style.web_api_location +
-                '/advertisement/gethomescreenadvertisementduo?orientation=vertical&userId=' +
-                GLOBAL.UserID +
-                '&resellerId=' +
-                GLOBAL.ResellerID +
-                '&deviceModel=' +
-                GLOBAL.Device_Model +
-                '&cmsService=' +
-                GLOBAL.CMS +
-                '&crmService=' +
-                GLOBAL.CRM +
-                '&city=' +
-                GLOBAL.City +
-                '&state=' +
-                GLOBAL.State +
-                '&country=' +
-                GLOBAL.Country,
+            '/advertisement/gethomescreenadvertisementduo?orientation=vertical&userId=' +
+            GLOBAL.UserID +
+            '&resellerId=' +
+            GLOBAL.ResellerID +
+            '&deviceModel=' +
+            GLOBAL.Device_Model +
+            '&cmsService=' +
+            GLOBAL.CMS +
+            '&crmService=' +
+            GLOBAL.CRM +
+            '&city=' +
+            GLOBAL.City +
+            '&state=' +
+            GLOBAL.State +
+            '&country=' +
+            GLOBAL.Country,
         );
         return fetch(
             GLOBAL.Settings_Gui.style.web_api_location +
-                '/advertisement/gethomescreenadvertisementduo?orientation=vertical&userId=' +
-                GLOBAL.UserID +
-                '&resellerId=' +
-                GLOBAL.ResellerID +
-                '&deviceModel=' +
-                GLOBAL.Device_Model +
-                '&cmsService=' +
-                GLOBAL.CMS +
-                '&crmService=' +
-                GLOBAL.CRM +
-                '&city=' +
-                GLOBAL.City +
-                '&state=' +
-                GLOBAL.State +
-                '&country=' +
-                GLOBAL.Country,
+            '/advertisement/gethomescreenadvertisementduo?orientation=vertical&userId=' +
+            GLOBAL.UserID +
+            '&resellerId=' +
+            GLOBAL.ResellerID +
+            '&deviceModel=' +
+            GLOBAL.Device_Model +
+            '&cmsService=' +
+            GLOBAL.CMS +
+            '&crmService=' +
+            GLOBAL.CRM +
+            '&city=' +
+            GLOBAL.City +
+            '&state=' +
+            GLOBAL.State +
+            '&country=' +
+            GLOBAL.Country,
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log(
+                GLOBAL.show_log && console.log(
                     'get home screen duo ads response: ',
                     responseJson_,
                 );
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async getHomeScreenAds(orientation) {
-        console.log(
+        GLOBAL.show_log && console.log(
             'get home screen ads: ',
             GLOBAL.Settings_Gui.style.web_api_location +
-                '/advertisement/gethomescreenadvertisement?orientation=' +
-                orientation +
-                '&userId=' +
-                GLOBAL.UserID +
-                '&resellerId=' +
-                GLOBAL.ResellerID +
-                '&deviceModel=' +
-                GLOBAL.Device_Model +
-                '&cmsService=' +
-                GLOBAL.CMS +
-                '&crmService=' +
-                GLOBAL.CRM +
-                '&city=' +
-                GLOBAL.City +
-                '&state=' +
-                GLOBAL.State +
-                '&country=' +
-                GLOBAL.Country,
+            '/advertisement/gethomescreenadvertisement?orientation=' +
+            orientation +
+            '&userId=' +
+            GLOBAL.UserID +
+            '&resellerId=' +
+            GLOBAL.ResellerID +
+            '&deviceModel=' +
+            GLOBAL.Device_Model +
+            '&cmsService=' +
+            GLOBAL.CMS +
+            '&crmService=' +
+            GLOBAL.CRM +
+            '&city=' +
+            GLOBAL.City +
+            '&state=' +
+            GLOBAL.State +
+            '&country=' +
+            GLOBAL.Country,
         );
         return fetch(
             GLOBAL.Settings_Gui.style.web_api_location +
-                '/advertisement/gethomescreenadvertisement?orientation=' +
-                orientation +
-                '&userId=' +
-                GLOBAL.UserID +
-                '&resellerId=' +
-                GLOBAL.ResellerID +
-                '&deviceModel=' +
-                GLOBAL.Device_Model +
-                '&cmsService=' +
-                GLOBAL.CMS +
-                '&crmService=' +
-                GLOBAL.CRM +
-                '&city=' +
-                GLOBAL.City +
-                '&state=' +
-                GLOBAL.State +
-                '&country=' +
-                GLOBAL.Country,
+            '/advertisement/gethomescreenadvertisement?orientation=' +
+            orientation +
+            '&userId=' +
+            GLOBAL.UserID +
+            '&resellerId=' +
+            GLOBAL.ResellerID +
+            '&deviceModel=' +
+            GLOBAL.Device_Model +
+            '&cmsService=' +
+            GLOBAL.CMS +
+            '&crmService=' +
+            GLOBAL.CRM +
+            '&city=' +
+            GLOBAL.City +
+            '&state=' +
+            GLOBAL.State +
+            '&country=' +
+            GLOBAL.Country,
         )
             .then(response_ => response_.json())
             .then(responseJson_ => {
-                console.log('get home screen ads response: ', responseJson_);
+                GLOBAL.show_log && console.log('get home screen ads response: ', responseJson_);
                 return responseJson_;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     async getAdvertisement(path) {
-        console.log('get advertisement: ', path);
+        GLOBAL.show_log && console.log('get advertisement: ', path);
         return fetch(path)
             .then(response => response.json())
             .then(responseJson => {
-                console.log('get advertisement response: ', responseJson);
+                GLOBAL.show_log && console.log('get advertisement response: ', responseJson);
                 return responseJson;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
     getYoutube = async path => {
-        console.log('get youtube: ', path);
+        GLOBAL.show_log && console.log('get youtube: ', path);
         const response = await fetch(path, {
             method: 'GET',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-        }).catch(error => {});
+        }).catch(error => { });
         const json = await response._bodyInit;
-        console.log('get youtube response: ', json);
+        GLOBAL.show_log && console.log('get youtube response: ', json);
         return json;
     };
     async getText(path) {
-        console.log('get text: ', path);
+        GLOBAL.show_log && console.log('get text: ', path);
         return fetch(path, {
             method: 'GET',
         })
             .then(response => response.text())
             .then(responseJson => {
-                console.log('get text response: ', responseJson);
+                GLOBAL.show_log && console.log('get text response: ', responseJson);
                 return responseJson;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
 
     async getJson(path) {
@@ -1150,15 +1150,15 @@ class DAL {
             myHeaders.set('Accept-Encoding', 'gzip;q=1.0, compress;q=0.5');
         }
         try {
-            console.log('get json: ', path);
+            GLOBAL.show_log && console.log('get json: ', path);
             const jsonCall = await fetch(path, {
                 method: 'GET',
                 headers: myHeaders,
             });
             const json_ = await jsonCall;
-            console.log('get json response: ', json_.json());
+            GLOBAL.show_log && console.log('get json response: ', json_.json());
             return json_.json();
-        } catch (err) {}
+        } catch (err) { }
     }
 
     async setReportLogs(message) {
@@ -1194,17 +1194,17 @@ class DAL {
 
     async getWeather() {
         var path =
-            'https://www.worldweatheronline.com/feed/premium-weather-v2.ashx?q=' +
+            GLOBAL.WORLD_WEATHER_URL + '?q=' +
             GLOBAL.User.customer.city +
             '&date=today&key=a7a4a251cb125437120110&feedKey=887d9c34f8125518120110&format=json';
-        console.log('get weather: ', path);
+        GLOBAL.show_log && console.log('get weather: ', path);
         return fetch(path)
             .then(response => response.json())
             .then(responseJson => {
-                console.log('get weather response: ', responseJson);
+                GLOBAL.show_log && console.log('get weather response: ', responseJson);
                 return responseJson;
             })
-            .catch(error => {});
+            .catch(error => { });
     }
 }
 const dal = new DAL();
